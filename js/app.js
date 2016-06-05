@@ -6,6 +6,7 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = -101;
 };
 
 // Update the enemy's position, required method for game
@@ -14,6 +15,15 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    // Clear contaxt
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.x += (Math.random() + 10) * dt;
+    // while (this.x <= 505) {
+    //     var enemy = new Enemy;
+    //     enemy.x = (Math.random() + 505) * dt;
+    // }
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -29,20 +39,35 @@ Enemy.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [];
-var player = function() {
-    this.sprite = 'images/char-boy.png';
-};
+
+var enemyUpper = new Enemy;
+enemyUpper.y = 60;
+var enemyMiddle = new Enemy;
+enemyMiddle.y = 143;
+var enemyLower = new Enemy;
+enemyLower.y = 226;
+var allEnemies = [
+    enemyUpper,
+    enemyMiddle,
+    enemyLower
+];
+
+var player = {};
+
+player.sprite = 'images/char-boy.png';
+
 player.update = function() {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
 };
 player.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(player.sprite), player.x, player.y);
 };
 
-
+player.handleInput = function (key) {
+     /* body... */
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
