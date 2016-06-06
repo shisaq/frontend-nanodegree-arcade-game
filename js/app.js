@@ -7,23 +7,21 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = -101;
+    this.randomNum = Math.random() * 800 + 150;
 };
-
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    if (this.x <= 505) {
+        this.x += this.randomNum * dt;
+    } else {
+        this.x = -100000;
+        setTimeout(Enemy.bind(this),(Math.random() * 2000 + 0));
 
-    // Clear contaxt
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.x += (Math.random() + 10) * dt;
-    // while (this.x <= 505) {
-    //     var enemy = new Enemy;
-    //     enemy.x = (Math.random() + 505) * dt;
-    // }
-
+    }
 };
 
 // Draw the enemy on the screen, required method for game
