@@ -16,11 +16,16 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     if (this.x <= 505) {
+        // increase the x value of enemy, until the end of canvas
         this.x += this.randomNum * dt;
     } else {
+        // make the x value negative enough to let the specify line
+        // have a little break
         this.x = -100000;
+        // define how long the line will stay on blank. I used
+        // setTimeout with bind, to use the correct 'this', based
+        // on Mozilla MDN, see link: https://goo.gl/hrdHAx
         setTimeout(Enemy.bind(this),(Math.random() * 2000 + 0));
-
     }
 };
 
@@ -38,6 +43,7 @@ Enemy.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+// define 3 kinds of enemies from 3 different lines
 var enemyUpper = new Enemy;
 enemyUpper.y = 60;
 var enemyMiddle = new Enemy;
@@ -52,6 +58,9 @@ var allEnemies = [
 
 var player = {};
 
+player.x = 0;
+player.y = 404;
+
 player.sprite = 'images/char-boy.png';
 
 player.update = function() {
@@ -64,12 +73,23 @@ player.render = function() {
 };
 
 player.handleInput = function (key) {
-     /* body... */
+    if (key === 'left') {
+    player.x -= 101;
+    }
+    if (key === 'up') {
+    player.y -= 83;
+    }
+    if (key === 'right') {
+    player.x += 101;
+    }
+    if (key === 'down') {
+    player.y += 83;
+    }
 };
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keydown', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
