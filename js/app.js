@@ -44,30 +44,54 @@ Enemy.prototype.render = function() {
 // Place the player object in a variable called player
 
 // define 3 kinds of enemies from 3 different lines
-var enemyUpper = new Enemy;
-enemyUpper.y = 60;
-var enemyMiddle = new Enemy;
-enemyMiddle.y = 143;
-var enemyLower = new Enemy;
-enemyLower.y = 226;
-var allEnemies = [
-    enemyUpper,
-    enemyMiddle,
-    enemyLower
-];
+// var enemyUpper = new Enemy();
+// enemyUpper.y = 60;
+// var enemyMiddle = new Enemy();
+// enemyMiddle.y = 143;
+// var enemyLower = new Enemy();
+// enemyLower.y = 226;
+// var allEnemies = [
+//     enemyUpper,
+//     enemyMiddle,
+//     enemyLower
+// ];
+
+// use a better way to define every line of enenies
+var allEnemies = [];
+for(var i = 0; i < 3; i++) {
+    allEnemies[i] = new Enemy();
+    allEnemies[i].y = 60 + i * 83;
+}
 
 var player = {};
 
-player.x = 0;
-player.y = 404;
+player.init = function () {
+     this.x = 202;
+     this.y = 404;
+}
 
-player.sprite = 'images/char-boy.png';
+player.init();
+
+player.sprite = 'images/char-horn-girl.png';
 
 player.update = function() {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    // collision judgement
+    if ((Math.abs(this.x - Math.trunc(allEnemies[2].x)) <= 60 && this.y === 238) ||
+        (Math.abs(this.x - Math.trunc(allEnemies[1].x)) <= 60 && this.y === 155) ||
+        (Math.abs(this.x - Math.trunc(allEnemies[0].x)) <= 60 && this.y === 72)) {
+        player.init();
+    }
+
+    // // win judgement
+    if (this.y < 72) {
+        alert('You Win!');
+    }
 };
+
 player.render = function() {
     ctx.drawImage(Resources.get(player.sprite), player.x, player.y);
 };
