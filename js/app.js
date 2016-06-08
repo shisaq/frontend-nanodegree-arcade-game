@@ -88,7 +88,8 @@ player.update = function() {
 
     // // win judgement
     if (this.y < 72) {
-        alert('You Win!');
+        player.init();
+        alert('You Win! Press enter to restart!');
     }
 };
 
