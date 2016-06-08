@@ -83,13 +83,14 @@ player.update = function() {
     if ((Math.abs(this.x - Math.trunc(allEnemies[2].x)) <= 60 && this.y === 238) ||
         (Math.abs(this.x - Math.trunc(allEnemies[1].x)) <= 60 && this.y === 155) ||
         (Math.abs(this.x - Math.trunc(allEnemies[0].x)) <= 60 && this.y === 72)) {
+        alert('You lose! Press enter to restart!');
         player.init();
     }
 
     // // win judgement
     if (this.y < 72) {
         player.init();
-        alert('You Win! Press enter to restart!');
+        alert('Congratulations! You Win!');
     }
 };
 
@@ -99,16 +100,22 @@ player.render = function() {
 
 player.handleInput = function (key) {
     if (key === 'left') {
-    player.x -= 101;
+        player.x -= 101;
+        // make sure player cannot move out of the map
+        if (this.x <= 0) {this.x = 0;}
     }
     if (key === 'up') {
-    player.y -= 83;
+        player.y -= 83;
     }
     if (key === 'right') {
-    player.x += 101;
+        player.x += 101;
+        // make sure player cannot move out of the map
+        if (this.x >= 505) {this.x = 404;}
     }
     if (key === 'down') {
-    player.y += 83;
+        player.y += 83;
+        // make sure player cannot move out of the map
+        if (this.y >= 404) {this.y = 404;}
     }
 };
 
