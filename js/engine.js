@@ -159,7 +159,19 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        alert('Welcome! Press enter to start.');
+        // alert('Welcome! Press enter to start.');
+        var welcomeMsg = new Image();
+        welcomeMsg.src = 'https://fonts.googleapis.com/css?family=Sigmar+One';
+
+        welcomeMsg.onerror = function() {
+            ctx.font = 'bold 50px "Sigmar One"';
+            ctx.fillStyle = "Black";
+            ctx.fillText("ANGRY BUG", 78, 111);
+            ctx.font = '30px "Sigmar One"';
+            ctx.fillText("Use arrow keys to", 78, 411);
+            ctx.fillText("Control your hero!", 78, 451);
+            alert('Press enter to start');
+        }
     }
 
     /* Go ahead and load all of the images we know we're going to need to

@@ -58,10 +58,13 @@ Enemy.prototype.render = function() {
 
 // use a better way to define every line of enenies
 var allEnemies = [];
-for(var i = 0; i < 3; i++) {
-    allEnemies[i] = new Enemy();
-    allEnemies[i].y = 60 + i * 83;
+Enemy.prototype.reset = function () {
+    for(var i = 0; i < 3; i++) {
+        allEnemies[i] = new Enemy();
+        allEnemies[i].y = 60 + i * 83;
+    }
 }
+Enemy.prototype.reset();
 
 var player = {};
 
@@ -80,9 +83,9 @@ player.update = function() {
     // all computers.
 
     // collision judgement
-    if ((Math.abs(this.x - Math.trunc(allEnemies[2].x)) <= 60 && this.y === 238) ||
-        (Math.abs(this.x - Math.trunc(allEnemies[1].x)) <= 60 && this.y === 155) ||
-        (Math.abs(this.x - Math.trunc(allEnemies[0].x)) <= 60 && this.y === 72)) {
+    if ((Math.abs(this.x - allEnemies[2].x) <= 60 && this.y === 238) ||
+        (Math.abs(this.x - allEnemies[1].x) <= 60 && this.y === 155) ||
+        (Math.abs(this.x - allEnemies[0].x) <= 60 && this.y === 72)) {
         alert('You lose! Press enter to restart!');
         player.init();
     }
