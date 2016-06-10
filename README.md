@@ -7,3 +7,6 @@ For detailed instructions on how to get started, check out this [guide](https://
 
 ## License
 Arcade-game is under the [MIT license](http://choosealicense.com/licenses/mit/). Copyright (c) 2016 [shisaq](https://github.com/shisaq).
+
+## bugs
+1. The Google font will fail to load when running the game for the first time.
