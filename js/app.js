@@ -7,7 +7,7 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = -101;
-    this.randomNum = Math.random() * 800 + 150;
+    this.speed = Math.random() * 800 + 150;
 };
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -17,15 +17,12 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     if (this.x <= 505) {
         // increase the x value of enemy, until the end of canvas
-        this.x += this.randomNum * dt;
+        this.x += this.speed * dt;
     } else {
         // make the x value negative enough to let the specify line
         // have a little break
-        this.x = -100000;
-        // define how long the line will stay on blank. I used
-        // setTimeout with bind, to use the correct 'this', based
-        // on Mozilla MDN, see link: https://goo.gl/hrdHAx
-        setTimeout(Enemy.bind(this),(Math.random() * 2000 + 0));
+        this.x = Math.random() * 0 + (-200);
+        this.speed = Math.random() * 800 + 150;
     }
 };
 
@@ -73,9 +70,22 @@ var Player = function () {
     this.y = 404;
 }
 
-Player.prototype.reset = function () {
+Player.prototype.init = function () {
      this.x = 202;
      this.y = 404;
+}
+
+Player.prototype.reset = function () {
+    // collision result
+    if (this.y >= 72) {
+        alert('You lose! Press enter to restart!');
+    }
+
+    // win result
+    if (this.y < 72) {
+        alert('Congratulations! You Win!');
+    }
+    this.init();
 }
 
 Player.prototype.update = function() {
@@ -87,14 +97,6 @@ Player.prototype.update = function() {
     if ((Math.abs(this.x - allEnemies[2].x) <= 60 && this.y === 238) ||
         (Math.abs(this.x - allEnemies[1].x) <= 60 && this.y === 155) ||
         (Math.abs(this.x - allEnemies[0].x) <= 60 && this.y === 72)) {
-        alert('You lose! Press enter to restart!');
-        this.reset();
-    }
-
-    // // win judgement
-    if (this.y < 72) {
-        this.render();
-        alert('Congratulations! You Win!');
         this.reset();
     }
 };
@@ -111,11 +113,15 @@ Player.prototype.handleInput = function (key) {
     }
     if (key === 'up') {
         player.y -= 83;
+        if (this.y <= 0) {
+            this.render();
+            this.reset();
+        }
     }
     if (key === 'right') {
         player.x += 101;
         // make sure player cannot move out of the map
-        if (this.x >= 505) {this.x = 404;}
+        if (this.x >= 404) {this.x = 404;}
     }
     if (key === 'down') {
         player.y += 83;
