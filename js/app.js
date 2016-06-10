@@ -66,18 +66,19 @@ Enemy.prototype.reset = function () {
 }
 Enemy.prototype.reset();
 
-var player = {};
+// start player part
+var Player = function () {
+    this.sprite = 'images/char-horn-girl.png';
+    this.x = 202;
+    this.y = 404;
+}
 
-player.init = function () {
+Player.prototype.reset = function () {
      this.x = 202;
      this.y = 404;
 }
 
-player.init();
-
-player.sprite = 'images/char-horn-girl.png';
-
-player.update = function() {
+Player.prototype.update = function() {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -87,21 +88,22 @@ player.update = function() {
         (Math.abs(this.x - allEnemies[1].x) <= 60 && this.y === 155) ||
         (Math.abs(this.x - allEnemies[0].x) <= 60 && this.y === 72)) {
         alert('You lose! Press enter to restart!');
-        player.init();
+        this.reset();
     }
 
     // // win judgement
     if (this.y < 72) {
-        player.init();
+        this.render();
         alert('Congratulations! You Win!');
+        this.reset();
     }
 };
 
-player.render = function() {
-    ctx.drawImage(Resources.get(player.sprite), player.x, player.y);
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-player.handleInput = function (key) {
+Player.prototype.handleInput = function (key) {
     if (key === 'left') {
         player.x -= 101;
         // make sure player cannot move out of the map
@@ -121,6 +123,8 @@ player.handleInput = function (key) {
         if (this.y >= 404) {this.y = 404;}
     }
 };
+
+var player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
