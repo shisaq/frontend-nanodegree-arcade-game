@@ -159,7 +159,9 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // alert('Welcome! Press enter to start.');
+        // This reset function can draw a welcome message in the beginning.
+        // Used a method in stackoverflow, answered by @a paid nerd.
+        // See link: http://goo.gl/1JAuCn
         var welcomeMsg = new Image();
         welcomeMsg.src = 'https://fonts.googleapis.com/css?family=Sigmar+One';
 
