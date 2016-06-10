@@ -7,7 +7,7 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = -101;
-    this.speed = Math.random() * 800 + 150;
+    this.speed = Math.random() * (1000 - 200) + 200;
 };
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -22,7 +22,7 @@ Enemy.prototype.update = function(dt) {
         // make the x value negative enough to let the specify line
         // have a little break
         this.x = Math.random() * 0 + (-200);
-        this.speed = Math.random() * 800 + 150;
+        this.speed = Math.random() * (1000 - 200) + 200;
     }
 };
 
