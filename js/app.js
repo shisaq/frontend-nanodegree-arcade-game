@@ -8,7 +8,7 @@ var Enemy = function(y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = -101;
     this.y = y;
-    this.speed = Math.random() * (500 - 200) + 200;
+    this.speed = Math.random() * (800 - 200) + 200;
 };
 
 // Update the enemy's position, required method for game
@@ -24,7 +24,7 @@ Enemy.prototype.update = function(dt) {
         // make the x value negative enough to let the specify line
         // have a little break
         this.x = Math.random() * (-101 - (-500)) + (-500);
-        this.speed = Math.random() * (500 - 200) + 200;
+        this.speed = Math.random() * (800 - 200) + 200;
     }
 };
 
@@ -64,18 +64,22 @@ Player.prototype.init = function () {
 Player.prototype.reset = function (dt) {
     // collision result
     if (this.y >= 72) {
+        // this means collision occurs, so heart should minus 1
         this.lifeNum--;
         if (this.lifeNum > 0) {
             this.x = 202;
             this.y = 404;
         } else {
-            alert('You lose!');
+            // lose result
             // make init method run after a dt time, so that it has
             // enough time to render the collision moment
+            setTimeout(function() {alert('You lose!');}, dt);
             setTimeout(this.init.bind(this), dt);
         }
     } else {
         // win result
+        // make init method run after a dt time, so that it has
+        // enough time to render the collision moment
         setTimeout(function() {alert('Congratulations! You Win!');}, dt);
         setTimeout(this.init.bind(this), dt);
     }
@@ -89,7 +93,28 @@ Player.prototype.update = function() {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    // draw 3 init hearts on the bottom of canvas
+    if (this.lifeNum === 3) {
+        ctx.drawImage(Resources.get(this.heart), 202, 545);
+        ctx.drawImage(Resources.get(this.heart), 303, 545);
+        ctx.drawImage(Resources.get(this.heart), 404, 545);
+    }
+    if (this.lifeNum === 2) {
+        this.clearHeart(404);
+    }
+    if (this.lifeNum === 1) {
+        this.clearHeart(303);
+    }
+    if (this.lifeNum === 0) {
+        this.clearHeart(202);
+    }
 };
+
+// draw a white rectangle to clear hearts
+Player.prototype.clearHeart = function (clearX) {
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(clearX, 590, 101, 101);
+}
 
 Player.prototype.handleInput = function (key) {
     if (key === 'left') {

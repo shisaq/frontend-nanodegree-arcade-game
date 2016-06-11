@@ -26,7 +26,7 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 505;
-    canvas.height = 606;
+    canvas.height = 707;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -64,7 +64,11 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
+        // make sure google font had already loaded when reset game
+        window.onload = function () {
+            reset();
+        }
+        // reset();
         lastTime = Date.now();
         main();
     }
@@ -166,13 +170,18 @@ var Engine = (function(global) {
 
         welcomeMsg.onerror = function() {
             ctx.font = 'bold 50px "Sigmar One"';
-            ctx.fillStyle = "Black";
+            ctx.fillStyle = "#000";
             ctx.fillText("ANGRY BUG", 78, 111);
             ctx.font = '30px "Sigmar One"';
             ctx.fillText("Use arrow keys to", 78, 411);
             ctx.fillText("Control your hero!", 78, 451);
             alert('Press enter to start');
         }
+
+        // draw hearts
+        ctx.fillStyle = "Black";
+        ctx.font = '25px "Sigmar One"';
+        ctx.fillText("Left Hearts:", 10, 640);
     }
 
     /* Go ahead and load all of the images we know we're going to need to
