@@ -67,7 +67,7 @@ var Engine = (function(global) {
         // make sure google font had already loaded when reset game
         window.onload = function () {
             reset();
-        }
+        };
         // reset();
         lastTime = Date.now();
         main();
@@ -176,7 +176,7 @@ var Engine = (function(global) {
             ctx.fillText("Use arrow keys to", 78, 411);
             ctx.fillText("Control your hero!", 78, 451);
             alert('Press enter to start');
-        }
+        };
 
         // draw hearts
         ctx.fillStyle = "Black";

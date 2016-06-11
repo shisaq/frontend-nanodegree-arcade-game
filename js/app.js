@@ -42,7 +42,7 @@ Enemy.prototype.checkCollisions = function (dt) {
         player.y < 0) {
         player.reset(dt);
     }
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -53,13 +53,13 @@ var Player = function () {
     this.lifeNum = 3;
     this.x = 202;
     this.y = 404;
-}
+};
 
 Player.prototype.init = function () {
     this.lifeNum = 3;
     this.x = 202;
     this.y = 404;
-}
+};
 
 Player.prototype.reset = function (dt) {
     // collision result
@@ -83,7 +83,7 @@ Player.prototype.reset = function (dt) {
         setTimeout(function() {alert('Congratulations! You Win!');}, dt);
         setTimeout(this.init.bind(this), dt);
     }
-}
+};
 
 Player.prototype.update = function() {
     // You should multiply any movement by the dt parameter
@@ -114,7 +114,7 @@ Player.prototype.render = function() {
 Player.prototype.clearHeart = function (clearX) {
     ctx.fillStyle = '#fff';
     ctx.fillRect(clearX, 590, 101, 101);
-}
+};
 
 Player.prototype.handleInput = function (key) {
     if (key === 'left') {
