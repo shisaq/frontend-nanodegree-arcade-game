@@ -49,26 +49,36 @@ Enemy.prototype.checkCollisions = function (dt) {
 // a handleInput() method.
 var Player = function () {
     this.sprite = 'images/char-horn-girl.png';
+    this.heart = 'images/Heart.png';
+    this.lifeNum = 3;
     this.x = 202;
     this.y = 404;
 }
 
 Player.prototype.init = function () {
+    this.lifeNum = 3;
     this.x = 202;
     this.y = 404;
 }
 
 Player.prototype.reset = function (dt) {
-    // this.render();
     // collision result
     if (this.y >= 72) {
-        setTimeout(function() {alert('You lose!');}, dt);
+        this.lifeNum--;
+        if (this.lifeNum > 0) {
+            this.x = 202;
+            this.y = 404;
+        } else {
+            alert('You lose!');
+            // make init method run after a dt time, so that it has
+            // enough time to render the collision moment
+            setTimeout(this.init.bind(this), dt);
+        }
     } else {
         // win result
         setTimeout(function() {alert('Congratulations! You Win!');}, dt);
+        setTimeout(this.init.bind(this), dt);
     }
-    // this.init();
-    setTimeout(this.init.bind(this), dt);
 }
 
 Player.prototype.update = function() {
