@@ -10,4 +10,4 @@ Arcade-game is under the [MIT license](http://choosealicense.com/licenses/mit/).
 
 ## bugs
 1. The Google font will fail to load when running the game for the first time.
-2. When winning, the player can stand on the river, but the last position is there, too, so this is not right.
+2. When winning, the player can stand on the river, but the alert window shows 3 times, which is not right.

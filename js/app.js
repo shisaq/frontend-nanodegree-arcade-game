@@ -8,7 +8,7 @@ var Enemy = function(y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = -101;
     this.y = y;
-    this.speed = Math.random() * (300 - 200) + 200;
+    this.speed = Math.random() * (500 - 200) + 200;
 };
 
 // Update the enemy's position, required method for game
@@ -23,8 +23,8 @@ Enemy.prototype.update = function(dt) {
     } else {
         // make the x value negative enough to let the specify line
         // have a little break
-        this.x = Math.random() * 0 + (-200);
-        this.speed = Math.random() * (300 - 200) + 200;
+        this.x = Math.random() * (-101 - (-500)) + (-500);
+        this.speed = Math.random() * (500 - 200) + 200;
     }
 };
 
@@ -68,7 +68,7 @@ Player.prototype.reset = function (dt) {
         setTimeout(function() {alert('Congratulations! You Win!');}, dt);
     }
     // this.init();
-    setTimeout(player.init.bind(this), dt);
+    setTimeout(this.init.bind(this), dt);
 }
 
 Player.prototype.update = function() {
