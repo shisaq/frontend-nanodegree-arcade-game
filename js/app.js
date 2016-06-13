@@ -1,3 +1,9 @@
+'use strict';
+// this function gets a random data from a stable scope.
+// See: https://goo.gl/q1r8gU
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 // Enemies our player must avoid
 var Enemy = function(y) {
     // Variables applied to each of our instances go here,
@@ -8,7 +14,7 @@ var Enemy = function(y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = -101;
     this.y = y;
-    this.speed = Math.random() * (800 - 200) + 200;
+    this.speed = getRandomArbitrary(200, 800);
 };
 
 // Update the enemy's position, required method for game
@@ -23,8 +29,8 @@ Enemy.prototype.update = function(dt) {
     } else {
         // make the x value negative enough to let the specify line
         // have a little break
-        this.x = Math.random() * (-101 - (-500)) + (-500);
-        this.speed = Math.random() * (800 - 200) + 200;
+        this.x = getRandomArbitrary(-500, -101);
+        this.speed = getRandomArbitrary(200, 800);
     }
 };
 
